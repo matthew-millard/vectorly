@@ -1,0 +1,23 @@
+{
+  "name": "vectorly",
+  "version": "1.0.0",
+  "description": "A command-line application that quickly creates a custom SVG logo",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  },
+  "dependencies": {
+    "inquirer": "^9.2.2"
+  }
+}
