@@ -25,4 +25,14 @@ inquirer
 			type: 'input',
 		},
 	])
-	.then(answers => console.log(answers))
+	.then(answers => {
+        
+    })
+
+
+
+
+// Exports
+module.exports = {
+	inquirer,
+}
