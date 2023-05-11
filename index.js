@@ -10,6 +10,12 @@ const questions = [
 		type: 'input',
 	},
 	{
+		message: 'Please select the font you would like the text to be in your logo from the options below:',
+        choices: ['Arial', 'Verdana', 'Times New Roman', 'Monospace'],
+		name: 'fontFamily',
+		type: 'list',
+	},
+	{
 		message: "What color would you like the text to be displayed? (Please enter a color keyword or a color's hexadecimal number.)",
 		name: 'textColor',
 		type: 'input',
