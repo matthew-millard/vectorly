@@ -1,4 +1,5 @@
 const inquirer = require('inquirer')
+const { writeFile } = require('fs/promises')
 const { Circle, Triangle, Square } = require('./lib/shapes.js')
 
 // Prompt user questions
@@ -44,5 +45,8 @@ inquirer
 		return svgString.render()
 	})
 	.then(svgString => {
-		console.log(svgString)
+		writeFile('logo.svg', svgString)
+	})
+	.catch(err => {
+		console.error(err)
 	})
