@@ -39,7 +39,7 @@ This application necessitates Node.js version 16 and above and the Inquirer pack
 
 [Github Repository](https://github.com/matthew-millard/vectorly)
 
-[Walkthrough Demonstration]()
+[Walkthrough Demonstration](https://drive.google.com/file/d/158HJ0ht27DqMVDbstNC4ksObzNdXe6Hp/view)
 
 ## Contribution
 
