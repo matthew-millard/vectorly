@@ -1,5 +1,6 @@
 const inquirer = require('inquirer')
-const { writeFile } = require('fs/promises')
+const { writeFile } = require('fs')
+const path = require('path')
 const { Circle, Triangle, Square } = require('./lib/shapes.js')
 
 // Prompt user questions
@@ -11,7 +12,7 @@ const questions = [
 	},
 	{
 		message: 'Please select the font you would like the text to be in your logo from the options below:',
-        choices: ['Arial', 'Verdana', 'Times New Roman', 'Monospace'],
+		choices: ['Arial', 'Verdana', 'Times New Roman', 'Monospace'],
 		name: 'fontFamily',
 		type: 'list',
 	},
@@ -36,6 +37,13 @@ const questions = [
 inquirer
 	.prompt(questions)
 	.then(answers => {
+		if (answers.text.length === 0 || answers.text.length > 3) {
+			throw new Error('Invalid input. Please enter 1-3 characters.')
+		} else {
+			return answers
+		}
+	})
+	.then(answers => {
 		const { shape } = answers
 		let svgString
 
@@ -51,7 +59,10 @@ inquirer
 		return svgString.render()
 	})
 	.then(svgString => {
-		writeFile('logo.svg', svgString)
+		writeFile(path.join(__dirname, 'logo.svg'), svgString, err => {
+			if (err) throw err
+			console.log('Successfully generated logo.svg')
+		})
 	})
 	.catch(err => {
 		console.error(err)
