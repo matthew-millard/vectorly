@@ -1,6 +1,9 @@
+// Module Imports
 const inquirer = require('inquirer')
 const { writeFile } = require('fs')
 const path = require('path')
+
+// Import shape constuctors
 const { Circle, Triangle, Square } = require('./lib/shapes.js')
 
 // Prompt user questions
@@ -34,36 +37,42 @@ const questions = [
 	},
 ]
 
-inquirer
-	.prompt(questions)
-	.then(answers => {
-		if (answers.text.length === 0 || answers.text.length > 3) {
-			throw new Error('Invalid input. Please enter 1-3 characters.')
-		} else {
-			return answers
-		}
-	})
-	.then(answers => {
-		const { shape } = answers
-		let svgString
-
-		if (shape === 'Circle') {
-			svgString = new Circle(answers)
-		} else if (shape === 'Triangle') {
-			svgString = new Triangle(answers)
-		} else if (shape === 'Square') {
-			svgString = new Square(answers)
-		} else {
-			console.error('Invalid shape')
-		}
-		return svgString.render()
-	})
-	.then(svgString => {
-		writeFile(path.join(__dirname, 'logo.svg'), svgString, err => {
-			if (err) throw err
-			console.log('Successfully generated logo.svg')
+// Inquirer 
+const init = () => {
+	inquirer
+		.prompt(questions)
+		.then(answers => {
+			if (answers.text.length === 0 || answers.text.length > 3) {
+				throw new Error('Invalid input. Please enter 1-3 characters.')
+			} else {
+				return answers
+			}
 		})
-	})
-	.catch(err => {
-		console.error(err)
-	})
+		.then(answers => {
+			const { shape } = answers
+			let svgString
+
+			if (shape === 'Circle') {
+				svgString = new Circle(answers)
+			} else if (shape === 'Triangle') {
+				svgString = new Triangle(answers)
+			} else if (shape === 'Square') {
+				svgString = new Square(answers)
+			} else {
+				console.error('Invalid shape')
+			}
+			return svgString.render()
+		})
+		.then(svgString => {
+			writeFile(path.join(__dirname, 'logo.svg'), svgString, err => {
+				if (err) throw err
+				console.log('Successfully generated logo.svg')
+			})
+		})
+		.catch(err => {
+			console.error(err)
+		})
+}
+
+// Initialize inquirer
+init()
